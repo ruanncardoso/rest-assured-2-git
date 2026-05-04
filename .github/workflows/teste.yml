@@ -1,0 +1,26 @@
+name: Rodar todos os nossos testes
+on:
+  push:
+    branches:
+      -master
+    pull_request:
+
+
+jobs:
+  run_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Setup Maven
+        run:
+          mvn --version
+
+      - name: Build and run tests
+        run:
+          mvn -Dtest=teste test
